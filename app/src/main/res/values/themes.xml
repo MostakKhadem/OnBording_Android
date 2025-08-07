@@ -1,5 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="Theme.Melbourne_Commuter" parent="android:Theme.Material.Light.NoActionBar" />
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- ✅ Base application theme -->
+    <style name="Theme.Melbourne_Commuter" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">#215D89</item>
+        <item name="colorPrimaryDark">#1A4566</item>
+        <item name="colorAccent">#F48CA1</item>
+    </style>
 </resources>

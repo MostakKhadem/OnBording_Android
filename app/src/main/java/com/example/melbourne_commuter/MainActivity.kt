@@ -1,47 +1,37 @@
 package com.example.melbourne_commuter
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.melbourne_commuter.ui.theme.Melbourne_CommuterTheme
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.melbourne_commuter.databinding.ActivityMainBinding
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            Melbourne_CommuterTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnFindParking.setOnClickListener {
+            Toast.makeText(this, "Finding Parking...", Toast.LENGTH_SHORT).show()
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        binding.btnPrediction.setOnClickListener {
+            Toast.makeText(this, "Predicting Availability...", Toast.LENGTH_SHORT).show()
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Melbourne_CommuterTheme {
-        Greeting("Android")
+        binding.btnCarbon.setOnClickListener {
+            Toast.makeText(this, "Viewing Carbon & Growth...", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnAbout.setOnClickListener {
+            Toast.makeText(this, "Opening About...", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnRefresh.setOnClickListener {
+            Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show()
+        }
     }
 }
