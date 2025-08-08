@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.example.melbourne_commuter"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.melbourne_commuter"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -72,6 +72,7 @@ dependencies {
 
     // Optional: MPAndroidChart (for graphs)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation(libs.androidx.activity)
 
     // Testing
     testImplementation("junit:junit:4.13.2")

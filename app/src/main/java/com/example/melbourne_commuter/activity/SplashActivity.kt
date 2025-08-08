@@ -1,9 +1,10 @@
-package com.example.melbourne_commuter
+package com.example.melbourne_commuter.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.melbourne_commuter.MainActivity
 import com.example.melbourne_commuter.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {

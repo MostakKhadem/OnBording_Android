@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.melbourne_commuter.activity.AboutActivity
+import com.example.melbourne_commuter.activity.CarbonGrowthActivity
 import com.example.melbourne_commuter.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,11 +25,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnCarbon.setOnClickListener {
-            Toast.makeText(this, "Viewing Carbon & Growth...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, CarbonGrowthActivity::class.java))
         }
 
         binding.btnAbout.setOnClickListener {
-            Toast.makeText(this, "Opening About...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, AboutActivity::class.java))
         }
 
         binding.btnRefresh.setOnClickListener {
