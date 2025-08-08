@@ -1,10 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ParkingPredictionActivity">
+    android:background="@android:color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Blue header -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:background="#215D89"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="Parking Prediction"
+            app:titleTextColor="@android:color/white"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Section title with bullet -->
+        <LinearLayout
+            android:id="@+id/sectionTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bullet_dot" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parking Bay Prediction"
+                android:textColor="#214B74"
+                android:textStyle="bold"
+                android:textSize="26sp" />
+        </LinearLayout>
+
+        <!-- Location row -->
+        <LinearLayout
+            android:id="@+id/rowLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/sectionTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Search Location"
+                android:textSize="16sp"
+                android:textColor="#444" />
+
+            <EditText
+                android:id="@+id/inputLocation"
+                android:layout_width="220dp"
+                android:layout_height="44dp"
+                android:hint="Newton Street"
+                android:background="@drawable/edittext_bg"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:inputType="textCapWords" />
+        </LinearLayout>
+
+        <!-- Date row -->
+        <LinearLayout
+            android:id="@+id/rowDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/rowLocation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Select date"
+                android:textSize="16sp"
+                android:textColor="#444" />
+
+            <EditText
+                android:id="@+id/inputDate"
+                android:layout_width="220dp"
+                android:layout_height="44dp"
+                android:hint="19 August, 2024"
+                android:focusable="false"
+                android:clickable="true"
+                android:background="@drawable/edittext_bg"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </LinearLayout>
+
+        <!-- Show result -->
+        <Button
+            android:id="@+id/btnShowResult"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:text="Show Result"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:background="@drawable/rounded_blue_button"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintTop_toBottomOf="@id/rowDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Result text -->
+        <TextView
+            android:id="@+id/resultText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#214B74"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/btnShowResult"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Spacer -->
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            app:layout_constraintTop_toBottomOf="@id/resultText"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -6,7 +6,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.melbourne_commuter.activity.AboutActivity
 import com.example.melbourne_commuter.activity.CarbonGrowthActivity
+import com.example.melbourne_commuter.activity.MapActivity
+import com.example.melbourne_commuter.activity.ParkingPredictionActivity
 import com.example.melbourne_commuter.databinding.ActivityMainBinding
+
+//AIzaSyA50vWKlZF-ZvrfVDuPcANNMSGn1KpaNTs
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -17,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnFindParking.setOnClickListener {
-            Toast.makeText(this, "Finding Parking...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MapActivity::class.java))
         }
 
         binding.btnPrediction.setOnClickListener {
-            Toast.makeText(this, "Predicting Availability...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, ParkingPredictionActivity::class.java))
         }
 
         binding.btnCarbon.setOnClickListener {
