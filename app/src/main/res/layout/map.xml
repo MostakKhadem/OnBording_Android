@@ -26,19 +26,18 @@
         android:paddingEnd="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:layout_margin="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp">
+        app:layout_constraintEnd_toStartOf="@+id/btnRefreshApi">
 
         <EditText
             android:id="@+id/etSearch"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="Search for destination"
+            android:hint="Search address"
             android:background="@android:color/transparent"
-            android:inputType="textCapWords"
             android:singleLine="true"/>
 
         <ImageButton
@@ -50,15 +49,27 @@
             app:tint="#215D89" />
     </LinearLayout>
 
-    <!-- My-location button -->
-    <ImageButton
-        android:id="@+id/btnMyLocation"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_margin="16dp"
+    <!-- Refresh API -->
+    <Button
+        android:id="@+id/btnRefreshApi"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Refresh"
+        android:textColor="@android:color/white"
         android:background="@drawable/rounded_blue_button"
-        android:src="@android:drawable/ic_menu_mylocation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@android:color/white" />
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnMyLocation"/>
+
+    <!-- My Location -->
+    <Button
+        android:id="@+id/btnMyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="My Location"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_blue_button"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
