@@ -22,11 +22,13 @@ class AboutActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
             title = getString(R.string.about_title)
-            setDisplayHomeAsUpEnabled(true)
+            setDisplayHomeAsUpEnabled(false)
         }
-        binding.toolbar.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
+//        binding.toolbar.setNavigationOnClickListener {
+//            onBackPressedDispatcher.onBackPressed()
+//        }
+
+
 
 
     }

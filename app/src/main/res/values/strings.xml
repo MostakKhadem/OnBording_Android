@@ -1,6 +1,25 @@
 <resources>
     <string name="app_name">Melbourne_Commuter</string>
     <string name="about_title">About</string>
+    <string name="terms_title">Terms &amp; Conditions</string>
+    <string name="close">Close</string>
 
     <string name="carbon_growth"><![CDATA[Carbon & Growth]]></string>
+    <string name="terms_body">
+        By using Melbourne Commuter, you agree to the following:
+
+        1. Data Sources: Live parking availability is sourced from the City of Melbourne open data. Availability may change and accuracy is not guaranteed.
+
+        2. Navigation: Directions are provided via third‑party apps (e.g., Google Maps). Always follow road rules and signage on site.
+
+        3. Location: If enabled, your device location is used only to show nearby parking and is not stored by this app.
+
+        4. Responsibility: You are responsible for safe driving and parking decisions. The app is provided “as is”, without warranties of any kind.
+
+        5. Privacy: We do not collect personal information. Logs and analytics (if enabled by you) may be used to improve the app experience.
+
+        6. Changes: Features and data sources may change without notice. Continued use constitutes acceptance of updated terms.
+
+        If you do not agree, please close the app.
+    </string>
 </resources>

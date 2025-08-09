@@ -30,8 +30,8 @@ class DisplayChartActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        //binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         when (intent.getStringExtra(EXTRA_MODE)) {
             "growth_online" -> showGrowthChart()

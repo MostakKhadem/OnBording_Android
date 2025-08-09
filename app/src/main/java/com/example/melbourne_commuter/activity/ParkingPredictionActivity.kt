@@ -30,8 +30,8 @@ class ParkingPredictionActivity : AppCompatActivity() {
 
         // Toolbar
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+//        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         // Default date = today
         binding.inputDate.setText(dateFormat.format(cal.time))

@@ -37,8 +37,8 @@ class CarbonGrowthActivity : AppCompatActivity() {
 
         // Top bar
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        //binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         setupYearSpinners()
         setupVehicleSpinner()

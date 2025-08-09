@@ -52,7 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Proceed to the next screen"
-        android:backgroundTint="#215D89"
+        android:background="@drawable/rounded_blue_button"
         android:textColor="@android:color/white"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="24dp"
