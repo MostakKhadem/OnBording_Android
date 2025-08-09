@@ -40,81 +40,64 @@ class DisplayChartActivity : AppCompatActivity() {
         }
     }
 
-    // -------- Growth Chart (BarChart) ----------
+    // ---------------- Growth chart (AWS data) ----------------
     private fun showGrowthChart() {
         val start = intent.getIntExtra(EXTRA_START_YEAR, -1)
         val end   = intent.getIntExtra(EXTRA_END_YEAR, -1)
         val json  = intent.getStringExtra(EXTRA_GROWTH_JSON).orEmpty()
 
-        val type = object : TypeToken<List<CarGrowth>>() {}.type
-        val items: List<CarGrowth> = Gson().fromJson(json, type)
+        val listType = object : TypeToken<List<CarGrowth>>() {}.type
+        val items: List<CarGrowth> = Gson().fromJson(json, listType) ?: emptyList()
 
         binding.title.text = "Australian Car Growth ($start → $end)"
-        binding.subtitle.text = "Growth percentage per year-range"
+        binding.subtitle.text = buildString {
+            if (items.isEmpty()) {
+                append("No data")
+            } else {
+                items.forEach {
+                    // `car_ownership_num` looks like totals in your sample (e.g., 209)
+                    append("• ${it.state} ${it.year_from}→${it.year_to}: ")
+                    append("${it.percentage_change}%  (ownership: ${it.car_ownership_num})\n")
+                }
+            }
+        }
 
-        // Build entries
+        // Build entries: y = percentage_change, x labels = year_from→year_to
         val entries = ArrayList<BarEntry>()
         val labels  = ArrayList<String>()
-
         items.forEachIndexed { index, item ->
-            entries += BarEntry(index.toFloat(), item.growth_percentage.toFloat())
+            entries += BarEntry(index.toFloat(), item.percentage_change.toFloat())
             labels  += "${item.year_from}→${item.year_to}"
         }
 
-        val dataSet = BarDataSet(entries, "% growth").apply {
-            color = Color.parseColor("#2BB673")         // green-ish
+        val dataSet = BarDataSet(entries, "% change").apply {
+            color = Color.parseColor("#2BB673") // green
             valueTextColor = Color.DKGRAY
             valueTextSize = 12f
         }
 
-        val barData = BarData(dataSet).apply {
-            setDrawValues(true)
+        val data = BarData(dataSet).apply {
             barWidth = 0.5f
         }
 
-        val chart = binding.barChart
-        chart.data = barData
-
-        // X Axis labels (year_from→year_to)
-        chart.xAxis.apply {
-            position = XAxis.XAxisPosition.BOTTOM
-            granularity = 1f
-            setDrawGridLines(false)
-            valueFormatter = IndexAxisValueFormatter(labels)
-            textColor = Color.DKGRAY
-            textSize = 12f
-        }
-
-        // Left axis is %; Right axis off
-        chart.axisLeft.apply {
-            axisMinimum = 0f
-            setDrawGridLines(true)
-            textColor = Color.DKGRAY
-            textSize = 12f
-        }
-        chart.axisRight.isEnabled = false
-
-        chart.description.isEnabled = false
-        chart.legend.isEnabled = true
-        chart.setFitBars(true)
-        chart.setPinchZoom(true)
-        chart.animateY(900)
-
-        chart.invalidate()
+        configureChart(labels, yMin = 0f)
+        binding.barChart.data = data
+        binding.barChart.animateY(900)
+        binding.barChart.invalidate()
     }
 
-    // -------- Carbon Chart (BarChart) ----------
+    // ---------------- Carbon chart (simple bars) ----------------
     private fun showCarbonChart() {
         val type = intent.getStringExtra(EXTRA_VEHICLE_TYPE).orEmpty()
         val km   = intent.getIntExtra(EXTRA_MILEAGE_KM, 0)
 
-        // Dummy emission factors (kg CO2 per km)
+        // Dummy emission factors (kg CO₂ per km)
         val factor = when {
-            type.contains("electric", ignoreCase = true) -> 0.05
-            type.contains("motor", ignoreCase = true)    -> 0.09
-            type.contains("truck", ignoreCase = true)    -> 0.30
-            type.contains("suv", ignoreCase = true)      -> 0.20
-            else                                         -> 0.12 // vehicle/sedan/hybrid default
+            type.contains("electric", true) -> 0.05
+            type.contains("motor", true)    -> 0.09
+            type.contains("truck", true)    -> 0.30
+            type.contains("suv", true)      -> 0.20
+            else                            -> 0.12 // sedan/hybrid default
         }
         val emissionsKg = (km * factor)
 
@@ -129,17 +112,35 @@ class DisplayChartActivity : AppCompatActivity() {
 
         val dataSet = BarDataSet(entries, "Mileage & Estimated CO₂").apply {
             colors = listOf(
-                Color.parseColor("#215D89"),  // blue for mileage
-                Color.parseColor("#F48CA1")   // pink for CO2
+                Color.parseColor("#215D89"), // blue
+                Color.parseColor("#F48CA1")  // pink
             )
             valueTextColor = Color.DKGRAY
             valueTextSize = 12f
         }
 
-        val barData = BarData(dataSet).apply { barWidth = 0.5f }
+        val data = BarData(dataSet).apply { barWidth = 0.5f }
 
+        configureChart(labels, yMin = 0f)
+        binding.barChart.data = data
+        binding.barChart.animateY(900)
+        binding.barChart.invalidate()
+    }
+
+    private fun showEmpty() {
+        binding.title.text = "Display Chart"
+        binding.subtitle.text = "No data to display"
+        binding.barChart.clear()
+        configureChart(labels = emptyList(), yMin = 0f)
+    }
+
+    // ---------------- Chart styling helper ----------------
+    private fun configureChart(labels: List<String>, yMin: Float) {
         val chart = binding.barChart
-        chart.data = barData
+        chart.description.isEnabled = false
+        chart.legend.isEnabled = true
+        chart.setFitBars(true)
+        chart.setPinchZoom(true)
 
         chart.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
@@ -151,24 +152,11 @@ class DisplayChartActivity : AppCompatActivity() {
         }
 
         chart.axisLeft.apply {
-            axisMinimum = 0f
+            axisMinimum = yMin
             setDrawGridLines(true)
             textColor = Color.DKGRAY
             textSize = 12f
         }
         chart.axisRight.isEnabled = false
-
-        chart.description.isEnabled = false
-        chart.legend.isEnabled = true
-        chart.setFitBars(true)
-        chart.setPinchZoom(true)
-        chart.animateY(900)
-        chart.invalidate()
-    }
-
-    private fun showEmpty() {
-        binding.title.text = "Display Chart"
-        binding.subtitle.text = "No data to display"
-        binding.barChart.clear()
     }
 }
